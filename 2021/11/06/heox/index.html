@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7" lang="UTF-8"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8" lang="UTF-8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="UTF-8"><!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <title>heox</title>
+
+    <meta name="author" content="JR">
+
+    <link rel="shortcut icon" href="/blog/images/favicon.png">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+    <link rel="canonical" href="https://jiarong-l.github.io/blog/2021/11/06/heox/">
+
+    
+        <link rel="alternate" href="/blog/atom.xml" type="application/atom+xml">
+    
+
+    
+
+    
+<script src="/blog/js/modernizr-2.0.js"></script>
+
+
+    
+<script src="/blog/js/jquery-1.9.1.js"></script>
+
+
+    
+    <script>window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));</script>
+
+    
+    <link rel="me" href="https://twitter.com/your_twitter">
+    
+
+
+
+    
+<script src="/blog/js/octo.js"></script>
+
+
+    
+<link rel="stylesheet" href="/blog/css/octo.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+
+    
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+
+<header role="banner">
+    <hgroup>
+        <h1><a href="/blog/">JR&#39;s Blog</a></h1>
+        
+    </hgroup>
+</header>
+
+<nav role="navigation">
+    
+        <ul class="subscription" data-subscription="rss">
+            <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        </ul>
+    
+
+    <form action="https://google.com/search" method="get">
+        <fieldset role="search">
+            <input type="hidden" name="q" value="site:https://jiarong-l.github.io/blog/">
+            <input class="search" type="text" name="q" results="0" placeholder="Search">
+        </fieldset>
+    </form>
+
+    <ul class="main-navigation">
+        
+            <li><a href="/">Blog</a></li>
+        
+            <li><a href="/archives">Archives</a></li>
+        
+    </ul>
+</nav>
+
+
+<div id="main">
+    <div id="content">
+        <div>
+    <article class="hentry" role="article">
+        <header>
+            <h1 class="entry-title">heox</h1>
+            <p class="meta">
+                <time datetime="2021-11-06T13:42:46.000Z" data-updated="true">Sat Nov 06 2021</time>
+            </p>
+        </header>
+        <div class="entry-content">
+            <h2 id="heox：heox文档"><a href="#heox：heox文档" class="headerlink" title="heox：heox文档"></a>heox：<a target="_blank" rel="noopener" href="https://hexo.bootcss.com/docs/asset-folders.html">heox文档</a></h2><p>虽然我对JavaScript和NodeJS一无所知，但这并不妨碍我安装heox。依照这个非常友好的测评：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/305812430">link</a>，以下为记录： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># install NodeJS before hand</span><br><span class="line"></span><br><span class="line"># install hexo</span><br><span class="line">npm i -g hexo</span><br></pre></td></tr></table></figure>
+
+<p>在blog_heox文件夹中进行初始化（blog_heox不能是git clone得到的空文件夹，不然会有冲突）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># init hexo in blog/</span><br><span class="line">mkdir blog/ ; cd blog/</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+
+<p>heox生成了许多文件。修改blog/文件夹下的_config.yml：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">## Change theme</span><br><span class="line"># &lt; download octo to themes/ &gt;</span><br><span class="line">theme: octo</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## Deploy to e.g. git pages </span><br><span class="line"># create &#x27;blog&#x27; repo before hand</span><br><span class="line"></span><br><span class="line">url: https://[someone].github.io/blog</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:Jiarong-L/blog.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line">## Easier image Embedding </span><br><span class="line">post_asset_folder: true</span><br><span class="line">marked:</span><br><span class="line">  prependRoot: true</span><br><span class="line">  postAsset: true</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>基本使用方式见hexo提示，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># create heox.md in blog/source/_posts</span><br><span class="line">hexo n heox</span><br><span class="line"></span><br><span class="line"># Remove generated files and cache.</span><br><span class="line">hexo clean</span><br><span class="line"></span><br><span class="line"># Generate static files.</span><br><span class="line">hexo g</span><br><span class="line"></span><br><span class="line"># Visit http://localhost:4000/ for preview</span><br><span class="line">hexo s</span><br><span class="line"></span><br><span class="line"># Deploy to e.g. git pages</span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line"># Suggest: hexo clean ; hexo g ; hexo s</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="测试一下图片展示"><a href="#测试一下图片展示" class="headerlink" title="测试一下图片展示"></a>测试一下图片展示</h2><p>以下三种都可以使用，不过反正我的markdown不能展示。。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;t1.PNG&quot;&gt;</span><br><span class="line">&#123;% asset_img t1.PNG %&#125;</span><br><span class="line">![t1](t1.PNG)</span><br><span class="line"></span><br><span class="line"># not working:</span><br><span class="line">&lt;img src=&quot;heox/t1.PNG&quot;&gt;</span><br><span class="line">&lt;img src=&quot;/heox/t1.PNG&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>图片大小调节参考这个博客：<a target="_blank" rel="noopener" href="https://bobcn.github.io/2018/03/24/hexo_reset_image_size/">link</a>，但似乎都无效（why？？？）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">## ![t1](t1.PNG?&lt;width&gt;x&lt;height&gt;) or ![t1](t1.PNG?&lt;scale_percent&gt;)</span><br><span class="line">![t1](t1.PNG?50x)</span><br><span class="line">![t1](t1.PNG?50)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="可用"><a href="#可用" class="headerlink" title="可用"></a>可用</h3><p>不知为何，对于大小只有width设置有用；位置用html设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;t1.PNG&quot; width=&quot;100px&quot;&gt; </span><br><span class="line"># or </span><br><span class="line">&lt;div align=&quot;center&quot;&gt;&lt;img src=&quot;t1.PNG&quot; width=&quot;100px&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<div align="center"><img src="t1.PNG" width="100px"></div>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <footer>
+            <p class="meta">
+                <span class="byline author vcard">Posted by <span class="fn">JR</span></span>
+                <time datetime="2021-11-06T13:42:46.000Z" data-updated="true">Sat Nov 06 2021</time>
+                
+            </p>
+            <div class="sharing">
+    
+        <a class="twitter-share-button"
+           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=heox">
+            Tweet
+        </a>
+    
+</div>
+
+            <p class="meta">
+                
+
+                
+                <a class="basic-alignment right" href="/blog/" title="Previous Post: Hello World">Hello World »</a>
+                
+            </p>
+        </footer>
+    </article>
+
+    
+
+</div>
+
+<aside class="sidebar">
+    <section class="odd">
+    <h1>Recent Posts</h1>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2021/11/06/heox/">heox</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2021/11/06/hello-world/">Hello World</a></li></ul>
+</section><section class="even">
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+        <li class="loading">Status updating&#8230;</li>
+    </ul>
+
+    <a target="_blank" rel="noopener" href="https://github.com/your_github">@your_github</a> on GitHub
+
+    <script>
+        $(document).ready(function(){
+            const options = {
+                user: 'your_github',
+                count: 0,
+                skip_forks: true,
+                target: '#gh_repos'
+            }
+
+            function escapeHtml(str) {
+                return $('<div/>').text(str).html();
+            }
+
+            function render(target, repos){
+                let i, fragment = '', t = $(target)[0];
+
+                for(i = 0; i < repos.length; i++) {
+                    fragment += '<li><a href="'+repos[i].html_url+'">'+repos[i].name+'</a><p>'+escapeHtml(repos[i].description||'')+'</p></li>';
+                }
+                t.innerHTML = fragment;
+            }
+
+            $.ajax({
+                url: "https://api.github.com/users/"+options.user+"/repos?sort=pushed&callback=?",
+                dataType: 'jsonp',
+                error: function (err) {
+                    $(options.target + ' li.loading').addClass('error').text("Error loading feed");
+                },
+                success: function(data) {
+                    var repos = [];
+                    if (!data || !data.data) { return; }
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (options.skip_forks && data.data[i].fork) { continue; }
+                        repos.push(data.data[i]);
+                    }
+                    if (options.count) { repos.splice(options.count); }
+                    render(options.target, repos);
+                }
+            });
+        });
+    </script>
+</section>
+</aside>
+
+    </div>
+</div>
+
+<footer role="contentinfo">
+    <p>
+        Copyright © 2021 - JR -
+        <span class="credit">Generated using <a target="_blank" rel="noopener" href="https://github.com/jbreckmckye/hexo-theme-octo">Octo theme</a> for <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></span>
+    </p>
+</footer>
+
+
+
+</body>
+</html>
