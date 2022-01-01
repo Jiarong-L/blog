@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7" lang="UTF-8"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8" lang="UTF-8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="UTF-8"><!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <title>ncbi_taxonomy</title>
+
+    <meta name="author" content="JR">
+
+    <link rel="shortcut icon" href="/blog/images/favicon.png">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+    <link rel="canonical" href="https://jiarong-l.github.io/blog/2022/01/01/ncbi-taxonomy/">
+
+    
+        <link rel="alternate" href="/blog/atom.xml" type="application/atom+xml">
+    
+
+    
+
+    
+<script src="/blog/js/modernizr-2.0.js"></script>
+
+
+    
+<script src="/blog/js/jquery-1.9.1.js"></script>
+
+
+    
+    <script>window.twttr = (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t._e = [];
+            t.ready = function(f) {
+                t._e.push(f);
+            };
+
+            return t;
+        }(document, "script", "twitter-wjs"));</script>
+
+    
+    <link rel="me" href="https://twitter.com/your_twitter">
+    
+
+
+
+    
+<script src="/blog/js/octo.js"></script>
+
+
+    
+<link rel="stylesheet" href="/blog/css/octo.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet"
+          type="text/css">
+
+    
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+
+<header role="banner">
+    <hgroup>
+        <h1><a href="/blog/">JR&#39;s Blog</a></h1>
+        
+    </hgroup>
+</header>
+
+<nav role="navigation">
+    
+        <ul class="subscription" data-subscription="rss">
+            <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+        </ul>
+    
+
+    <form action="https://google.com/search" method="get">
+        <fieldset role="search">
+            <input type="hidden" name="q" value="site:https://jiarong-l.github.io/blog/">
+            <input class="search" type="text" name="q" results="0" placeholder="Search">
+        </fieldset>
+    </form>
+
+    <ul class="main-navigation">
+        
+            <li><a href="/blog">Blogs</a></li>
+        
+            <li><a href="/blog/manu">Manu</a></li>
+        
+    </ul>
+</nav>
+
+
+<div id="main">
+    <div id="content">
+        <div>
+    <article class="hentry" role="article">
+        <header>
+            <h1 class="entry-title">ncbi_taxonomy</h1>
+            <p class="meta">
+                <time datetime="2022-01-01T11:32:55.000Z" data-updated="true">Sat Jan 01 2022</time>
+            </p>
+        </header>
+        <div class="entry-content">
+            <h2 id="NCBI-Taxonony"><a href="#NCBI-Taxonony" class="headerlink" title="NCBI Taxonony"></a>NCBI Taxonony</h2><ol>
+<li>下载(taxdump)[<a href="ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz]">ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz]</a></li>
+<li>简化一下将要使用的文件。提取names中储存学名的行，nodes的taxid parent_id tax_level列<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep &#x27;scientific name&#x27;  names.dmp &gt; names.dmp.scientific</span><br><span class="line">cut -f 1,3,5 nodes.dmp &gt; nodes.dmp_simplified</span><br></pre></td></tr></table></figure></li>
+<li>用法<ul>
+<li>从names.dmp中找到目标物种的taxid</li>
+<li>从nodes.dmp中回溯其parent id直至顶端</li>
+<li>利用names.dmp将parent id翻译为物种名</li>
+<li>注意，ncbi中可能会有taxa名称相同、但taxid不同的情况，他们就是不同的taxa。</li>
+<li>另，使用前，也可以删除一些无意义的字符，比如 ‘ “ [] () </li>
+</ul>
+</li>
+</ol>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>本示例中，由于只关注界门纲目科属种(NCBI中的Domain其实是superkingdom)，因此使用dict形式来返回结果，方便提取。若要完全NCBI的taxonomy，改用list或者string就好。  </p>
+<p>另：uniqName_id_dict_eachlevel存储每个目标level中没有重复的taxa name，若名字重复，只能从names_df里找了，会慢一点。  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">names_dir = &#x27;taxdump/names.dmp.scientific&#x27;</span><br><span class="line">nodes_dir = &#x27;taxdump/nodes.dmp_simplified&#x27;</span><br><span class="line">target_level = [&#x27;superkingdom&#x27;,&#x27;phylum&#x27;,&#x27;class&#x27;,&#x27;order&#x27;,&#x27;family&#x27;,&#x27;genus&#x27;,&#x27;species&#x27;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">names_df = pd.read_csv(names_dir,sep = &#x27;\t&#x27;,header = None)[[0,2]]</span><br><span class="line">names_df.columns = [&#x27;id&#x27;,&#x27;Name&#x27;]</span><br><span class="line">names_df.set_index(&#x27;id&#x27;,inplace = True)</span><br><span class="line">id_names_dict = dict(zip(names_df.index.values,names_df[&#x27;Name&#x27;]))                      ##</span><br><span class="line"></span><br><span class="line">nodes_df = pd.read_csv(nodes_dir,sep = &#x27;\t&#x27;,header = None)</span><br><span class="line">nodes_df.columns = [&#x27;id&#x27;,&#x27;parent_id&#x27;,&#x27;level&#x27;]</span><br><span class="line">nodes_df.set_index(&#x27;id&#x27;,inplace = True)</span><br><span class="line">id_parentid_dict = dict(zip(nodes_df.index.values,nodes_df[&#x27;parent_id&#x27;].values))       ##</span><br><span class="line">id_level_dict = dict(zip(nodes_df.index.values,nodes_df[&#x27;level&#x27;].values))              ##</span><br><span class="line"></span><br><span class="line">uniqName_id_dict_eachlevel = &#123;&#125;</span><br><span class="line">for temp_lvl in target_level:</span><br><span class="line">    temp_all_ids = nodes_df[nodes_df[&#x27;level&#x27;] == temp_lvl].index.values</span><br><span class="line">    temp_names_df = names_df.loc[temp_all_ids].copy()</span><br><span class="line">    temp_names_df[&#x27;id&#x27;] = temp_names_df.index.values</span><br><span class="line">    temp_val_counts = temp_names_df[&#x27;Name&#x27;].value_counts()</span><br><span class="line">    temp_val_counts = temp_val_counts[temp_val_counts == 1]</span><br><span class="line">    temp_val_counts = pd.DataFrame(&#123;&#x27;Name&#x27; : temp_val_counts.index.values&#125;)</span><br><span class="line">    temp_uniq_df = pd.merge(temp_names_df,temp_val_counts,on=&#x27;Name&#x27;)</span><br><span class="line">    uniqName_id_dict_eachlevel[temp_lvl] = dict(zip(temp_uniq_df[&#x27;Name&#x27;],temp_uniq_df[&#x27;id&#x27;]))</span><br><span class="line"></span><br><span class="line">def find_tax(taxid,tax_dict,id_names_dict = id_names_dict, id_parentid_dict = id_parentid_dict,id_level_dict=id_level_dict):   </span><br><span class="line">    temp_name = id_names_dict[taxid]</span><br><span class="line">    temp_level = id_level_dict[taxid]</span><br><span class="line">    temp_parent_id = id_parentid_dict[taxid]</span><br><span class="line">    tax_dict[temp_level] = temp_name</span><br><span class="line">    if taxid != temp_parent_id:</span><br><span class="line">        tax_dict = find_tax(temp_parent_id,tax_dict)</span><br><span class="line">    return tax_dict                            # this method will loose &#x27;no rank&#x27; layers, since there might be multiple of them!</span><br><span class="line"></span><br><span class="line">def tax_dict2str(tax_dict,target_level = target_level):</span><br><span class="line">    tax_str = &#x27;&#x27;</span><br><span class="line">    for lvl in target_level:</span><br><span class="line">        try:</span><br><span class="line">            val = abbrev_dict[lvl] + &#x27;__&#x27; + tax_dict[lvl]+ &#x27;;&#x27;</span><br><span class="line">        except:</span><br><span class="line">            val = abbrev_dict[lvl] + &#x27;__&#x27; + &#x27;norank&#x27; + &#x27;;&#x27;</span><br><span class="line">        tax_str += val</span><br><span class="line">    tax_str = tax_str.strip(&#x27;;&#x27;)</span><br><span class="line">    return tax_str</span><br><span class="line"></span><br><span class="line">################### Example 1 #####</span><br><span class="line">e1_name = &#x27;Dickeya phage phiDP10.3&#x27;</span><br><span class="line">e1_taxid = uniqName_id_dict_eachlevel[&#x27;species&#x27;][e1_name]</span><br><span class="line">e1_taxdict = find_tax(e1_taxid,&#123;&#125;)</span><br><span class="line">e1_taxfull = tax_dict2str(e1_taxdict)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+        </div>
+        <footer>
+            <p class="meta">
+                <span class="byline author vcard">Posted by <span class="fn">JR</span></span>
+                <time datetime="2022-01-01T11:32:55.000Z" data-updated="true">Sat Jan 01 2022</time>
+                
+            </p>
+            <div class="sharing">
+    
+        <a class="twitter-share-button"
+           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=ncbi_taxonomy">
+            Tweet
+        </a>
+    
+</div>
+
+            <p class="meta">
+                
+
+                
+                <a class="basic-alignment right" href="/blog/" title="Previous Post: heox">heox »</a>
+                
+            </p>
+        </footer>
+    </article>
+
+    
+
+</div>
+
+<aside class="sidebar">
+    <section class="odd">
+    <h1>Recent Posts</h1>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/blog/2022/01/01/ncbi-taxonomy/">ncbi_taxonomy</a></li><li class="post-list-item"><a class="post-list-link" href="/blog/2021/11/06/heox/">heox</a></li></ul>
+</section><section class="even">
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+        <li class="loading">Status updating&#8230;</li>
+    </ul>
+
+    <a target="_blank" rel="noopener" href="https://github.com/your_github">@your_github</a> on GitHub
+
+    <script>
+        $(document).ready(function(){
+            const options = {
+                user: 'your_github',
+                count: 0,
+                skip_forks: true,
+                target: '#gh_repos'
+            }
+
+            function escapeHtml(str) {
+                return $('<div/>').text(str).html();
+            }
+
+            function render(target, repos){
+                let i, fragment = '', t = $(target)[0];
+
+                for(i = 0; i < repos.length; i++) {
+                    fragment += '<li><a href="'+repos[i].html_url+'">'+repos[i].name+'</a><p>'+escapeHtml(repos[i].description||'')+'</p></li>';
+                }
+                t.innerHTML = fragment;
+            }
+
+            $.ajax({
+                url: "https://api.github.com/users/"+options.user+"/repos?sort=pushed&callback=?",
+                dataType: 'jsonp',
+                error: function (err) {
+                    $(options.target + ' li.loading').addClass('error').text("Error loading feed");
+                },
+                success: function(data) {
+                    var repos = [];
+                    if (!data || !data.data) { return; }
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (options.skip_forks && data.data[i].fork) { continue; }
+                        repos.push(data.data[i]);
+                    }
+                    if (options.count) { repos.splice(options.count); }
+                    render(options.target, repos);
+                }
+            });
+        });
+    </script>
+</section>
+</aside>
+
+    </div>
+</div>
+
+<footer role="contentinfo">
+    <p>
+        Copyright © 2022 - JR -
+        <span class="credit">Generated using <a target="_blank" rel="noopener" href="https://github.com/jbreckmckye/hexo-theme-octo">Octo theme</a> for <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></span>
+    </p>
+</footer>
+
+
+
+</body>
+</html>
