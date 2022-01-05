@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="UTF-8"><!--<![endif]-->
 <head>
     <meta charset="UTF-8">
-    <title>JR&#39;s Blog</title>
+    <title>Game_2048</title>
 
     <meta name="author" content="JR">
 
@@ -16,7 +16,7 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
-    <link rel="canonical" href="https://jiarong-l.github.io/blog/">
+    <link rel="canonical" href="https://jiarong-l.github.io/blog/2022/01/05/002-Game-2048/">
 
     
         <link rel="alternate" href="/blog/atom.xml" type="application/atom+xml">
@@ -108,60 +108,136 @@
 
 <div id="main">
     <div id="content">
-        <div class="blog-index">
+        <div>
+    <article class="hentry" role="article">
+        <header>
+            <h1 class="entry-title">Game_2048</h1>
+            <p class="meta">
+                <time datetime="2022-01-05T13:54:15.000Z" data-updated="true">Wed Jan 05 2022</time>
+            </p>
+        </header>
+        <div class="entry-content">
+            <h1 id="2048-小游戏"><a href="#2048-小游戏" class="headerlink" title="2048 小游戏"></a>2048 小游戏</h1><p>简单版，能跑就行。其中窗口排版设置参考‘小白叶书（bilibili）’。  2021-9-25</p>
+<h3 id="Dependancies"><a href="#Dependancies" class="headerlink" title="Dependancies"></a>Dependancies</h3><p>pip install turtle   </p>
+<h3 id="游戏机制"><a href="#游戏机制" class="headerlink" title="游戏机制"></a>游戏机制</h3><ol>
+<li><p>由上下左右键操控；<br>举例： 按‘上’键后，由最上方方块开始向上移动/融合，直到最下方方块（下方方块向上融合一次后停止移动）</p>
+</li>
+<li><p>当模块最大值达到2048时win；否则，当无法再移动任何模块时lose。 </p>
+</li>
+<li><p>移动思路</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">j=0</th>
+<th align="center">j=1</th>
+<th align="center">j=2</th>
+<th align="center">j=3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">i=0</td>
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">8</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">i=1</td>
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">9</td>
+<td align="center">13</td>
+</tr>
+<tr>
+<td align="center">i=2</td>
+<td align="center">2</td>
+<td align="center">6</td>
+<td align="center">10</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td align="center">i=3</td>
+<td align="center">3</td>
+<td align="center">7</td>
+<td align="center">11</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><br /></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">pos = i + j*4</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><br /></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>向左1</strong>： new_pos = pos -4 , 由pos=0开始</p>
+<p><strong>向上1</strong>： new_pos = pos -1 , 由pos=0开始</p>
+<p><strong>向右1</strong>： new_pos = pos +4 , 由pos=15开始</p>
+<p><strong>向下1</strong>： new_pos = pos +1 , 由pos=15开始 </p>
+<br />
+
+<p>设置好挪动范围(min_E,max_E)就行。同时，如果成功merge，则此方块本轮不再移动。  </p>
+<br />
+
+<h3 id="Scripts：2048-py"><a href="#Scripts：2048-py" class="headerlink" title="Scripts：2048.py"></a>Scripts：<a href="2048.py">2048.py</a></h3>
+        </div>
+        <footer>
+            <p class="meta">
+                <span class="byline author vcard">Posted by <span class="fn">JR</span></span>
+                <time datetime="2022-01-05T13:54:15.000Z" data-updated="true">Wed Jan 05 2022</time>
+                
+    <span class="categories">
     
-        
-        <article>
-            <header>
-                <h1 class="entry-title">
-                    <a href="/blog/2022/01/05/002-Game-2048/">Game_2048</a>
-                </h1>
-                <p class="meta">
-                    <time datetime="2022-01-05T13:54:15.000Z" data-updated="true">Wed Jan 05 2022</time>
-                </p>
-            </header>
-            <div class="entry-content"></div>
-            <footer>
-                <a rel="full-article" href="/blog/2022/01/05/002-Game-2048/">Read on →</a>
-            </footer>
-        </article>
-        
-        <article>
-            <header>
-                <h1 class="entry-title">
-                    <a href="/blog/2022/01/01/001-NCBI-Taxonomy/">ncbi_taxonomy</a>
-                </h1>
-                <p class="meta">
-                    <time datetime="2022-01-01T11:32:55.000Z" data-updated="true">Sat Jan 01 2022</time>
-                </p>
-            </header>
-            <div class="entry-content"></div>
-            <footer>
-                <a rel="full-article" href="/blog/2022/01/01/001-NCBI-Taxonomy/">Read on →</a>
-            </footer>
-        </article>
-        
-        <article>
-            <header>
-                <h1 class="entry-title">
-                    <a href="/blog/2021/11/06/000-heox/">heox</a>
-                </h1>
-                <p class="meta">
-                    <time datetime="2021-11-06T13:42:46.000Z" data-updated="true">Sat Nov 06 2021</time>
-                </p>
-            </header>
-            <div class="entry-content"></div>
-            <footer>
-                <a rel="full-article" href="/blog/2021/11/06/000-heox/">Read on →</a>
-            </footer>
-        </article>
-        
-        <div class="pagination">
-    <a href="/blog/">Blog Archives</a>
-    <span class="page-number current">1</span>
+        <a class="category" href="/blog/tags/Game/">Game</a>
+    
+    </span>
+
+            </p>
+            <div class="sharing">
+    
+        <a class="twitter-share-button"
+           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=Game_2048">
+            Tweet
+        </a>
+    
 </div>
 
+            <p class="meta">
+                
+
+                
+                <a class="basic-alignment right" href="/blog/" title="Previous Post: ncbi_taxonomy">ncbi_taxonomy »</a>
+                
+            </p>
+        </footer>
+    </article>
+
     
+
 </div>
 
 <aside class="sidebar">
